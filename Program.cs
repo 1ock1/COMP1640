@@ -19,8 +19,8 @@ foreach (var service in builder.Services)
 var app = builder.Build();
 
 // Only for stg
-app.UseSwagger();
-app.UseSwaggerUI();
+//app.UseSwagger();
+//app.UseSwaggerUI();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
