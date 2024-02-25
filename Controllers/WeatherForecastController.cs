@@ -42,7 +42,7 @@ namespace COMP1640.Controllers
         [HttpGet("GetHoho")]
         public string GetHoho()
         {
-            return "hoho";
+            return "hohoho";
         }
     }
 }
