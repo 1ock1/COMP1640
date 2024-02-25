@@ -39,5 +39,10 @@ namespace COMP1640.Controllers
             var result = await _userRepository.GetUser();
             return StatusCode(200, result);
         }
+        [HttpGet("GetHoho")]
+        public string GetHoho()
+        {
+            return "hoho";
+        }
     }
 }
