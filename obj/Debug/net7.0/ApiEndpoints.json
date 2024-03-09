@@ -1,0 +1,126 @@
+[
+  {
+    "ContainingType": "COMP1640.Controllers.WeatherForecastController",
+    "Method": "Get",
+    "RelativePath": "WeatherForecast",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[COMP1640.WeatherForecast, COMP1640, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "COMP1640.Controllers.WeatherForecastController",
+    "Method": "CreateShareFile",
+    "RelativePath": "WeatherForecast/CreateShareFile",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "containerName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "COMP1640.Controllers.WeatherForecastController",
+    "Method": "DeleteFile",
+    "RelativePath": "WeatherForecast/DeleteFile",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "file",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "COMP1640.Controllers.WeatherForecastController",
+    "Method": "GetHehe",
+    "RelativePath": "WeatherForecast/GetHehe",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[COMP1640.Models.User, COMP1640, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "COMP1640.Controllers.WeatherForecastController",
+    "Method": "RetrieveContentBlob",
+    "RelativePath": "WeatherForecast/RetrieveContentBlob",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "file",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "COMP1640.Controllers.WeatherForecastController",
+    "Method": "RetrieveDocument",
+    "RelativePath": "WeatherForecast/RetrieveDocument",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "COMP1640.Controllers.WeatherForecastController",
+    "Method": "RetrieveDocumentCC2",
+    "RelativePath": "WeatherForecast/RetrieveDocumentCC2",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "COMP1640.Controllers.WeatherForecastController",
+    "Method": "UploadFile",
+    "RelativePath": "WeatherForecast/UploadFile",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

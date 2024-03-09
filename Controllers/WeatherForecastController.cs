@@ -33,10 +33,40 @@ namespace COMP1640.Controllers
             })
             .ToArray();
         }
-        [HttpGet("GetHehe")]
-        public async Task<ActionResult<List<User>>> GetHehe()
+        [HttpPost("CreateShareFile")]
+        public async Task<ActionResult> CreateShareFile(string containerName)
         {
-            var result = await _userRepository.GetUser();
+            var result = await _userRepository.CreateContainer(containerName);
+            return Ok(result);
+        }
+        [HttpPost("UploadFile")]
+        public async Task<ActionResult> UploadFile(IFormFile file)
+        {
+            var result = await _userRepository.UploadFile(file);
+            return StatusCode(200, result);
+        }
+        [HttpDelete("DeleteFile")]
+        public async Task<ActionResult> DeleteFile(string file)
+        {
+            var result = await _userRepository.DeleteFile(file);
+            return StatusCode(200, result);
+        }
+        [HttpGet("RetrieveContentBlob")]
+        public async Task<ActionResult> RetrieveContentBlob(string file)
+        {
+            var result = await _userRepository.RetrieveContentBlob(file);
+            return StatusCode(200, result);
+        }
+        [HttpGet("RetrieveDocument")]
+        public async Task<ActionResult> RetrieveDocument()
+        {
+            var result = await _userRepository.RetrieveDocument();
+            return StatusCode(200, result);
+        }
+        [HttpGet("RetrieveDocumentCC2")]
+        public async Task<ActionResult> RetrieveDocumentCC2()
+        {
+            var result = await _userRepository.RetrieveDocumentCC2();
             return StatusCode(200, result);
         }
     }
