@@ -1,6 +1,6 @@
 using COMP1640.Repositories;
 using COMP1640.Utils;
-
+Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NAaF1cXmhIfEx1RHxQdld5ZFRHallYTnNWUj0eQnxTdEFjWn9fcHdXQWBcUkFzVw==");
 var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "hehe";
 // Add services to the container.
@@ -21,7 +21,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("http://localhost:3000/")
+                          policy.WithOrigins("https://comp1640-stg-be472.web.app/")
                                                   .AllowAnyHeader()
                                                   .AllowAnyMethod()
                                                   .SetIsOriginAllowed((host) => true)
