@@ -21,7 +21,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("https://comp1640-stg-be472.web.app/")
+                          policy.WithOrigins("http://localhost:3000/")
                                                   .AllowAnyHeader()
                                                   .AllowAnyMethod()
                                                   .SetIsOriginAllowed((host) => true)
