@@ -4,6 +4,5 @@ namespace COMP1640.Repositories.IRepositories
 {
     public interface IUserRepository
     {
-        public Task<List<User>> GetUser();
     }
 }

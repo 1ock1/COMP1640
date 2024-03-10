@@ -4,6 +4,7 @@ using COMP1640.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace COMP1640.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240310055044_AddRelationship")]
+    partial class AddRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,44 +87,6 @@ namespace COMP1640.Migrations
                     b.ToTable("FileReports");
                 });
 
-            modelBuilder.Entity("COMP1640.Models.Notification", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FromUserId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsRead")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ToUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Notification");
-                });
-
             modelBuilder.Entity("COMP1640.Models.PublishedReport", b =>
                 {
                     b.Property<int>("Id")
@@ -188,47 +153,6 @@ namespace COMP1640.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Reports");
-                });
-
-            modelBuilder.Entity("COMP1640.Models.ReportComment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool?>("IsEdited")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("PublishedReportId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ReportId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ResponseForUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PublishedReportId");
-
-                    b.HasIndex("ReportId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ReportComments");
                 });
 
             modelBuilder.Entity("COMP1640.Models.Topic", b =>
@@ -327,17 +251,6 @@ namespace COMP1640.Migrations
                     b.Navigation("Report");
                 });
 
-            modelBuilder.Entity("COMP1640.Models.Notification", b =>
-                {
-                    b.HasOne("COMP1640.Models.User", "User")
-                        .WithMany("Notifications")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("COMP1640.Models.PublishedReport", b =>
                 {
                     b.HasOne("COMP1640.Models.Report", "Report")
@@ -364,27 +277,6 @@ namespace COMP1640.Migrations
                         .IsRequired();
 
                     b.Navigation("Topic");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("COMP1640.Models.ReportComment", b =>
-                {
-                    b.HasOne("COMP1640.Models.PublishedReport", "PublishedReport")
-                        .WithMany("ReportComments")
-                        .HasForeignKey("PublishedReportId");
-
-                    b.HasOne("COMP1640.Models.Report", "Report")
-                        .WithMany("ReportComments")
-                        .HasForeignKey("ReportId");
-
-                    b.HasOne("COMP1640.Models.User", "User")
-                        .WithMany("ReportComments")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("PublishedReport");
-
-                    b.Navigation("Report");
 
                     b.Navigation("User");
                 });
@@ -429,18 +321,11 @@ namespace COMP1640.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("COMP1640.Models.PublishedReport", b =>
-                {
-                    b.Navigation("ReportComments");
-                });
-
             modelBuilder.Entity("COMP1640.Models.Report", b =>
                 {
                     b.Navigation("FileReports");
 
                     b.Navigation("PublishedReports");
-
-                    b.Navigation("ReportComments");
                 });
 
             modelBuilder.Entity("COMP1640.Models.Topic", b =>
@@ -450,10 +335,6 @@ namespace COMP1640.Migrations
 
             modelBuilder.Entity("COMP1640.Models.User", b =>
                 {
-                    b.Navigation("Notifications");
-
-                    b.Navigation("ReportComments");
-
                     b.Navigation("Reports");
                 });
 #pragma warning restore 612, 618

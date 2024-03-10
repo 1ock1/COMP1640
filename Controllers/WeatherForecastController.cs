@@ -33,12 +33,6 @@ namespace COMP1640.Controllers
             })
             .ToArray();
         }
-        [HttpGet("GetHehe")]
-        public async Task<ActionResult<List<User>>> GetHehe()
-        {
-            var result = await _userRepository.GetUser();
-            return StatusCode(200, result);
-        }
         [HttpGet("GetHoho")]
         public string GetHoho()
         {
