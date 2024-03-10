@@ -68,9 +68,10 @@ D:\Greenwich\NGUYEN QUANG THAI\Top-up\Enterprise Web Software Development\Projec
 D:\Greenwich\NGUYEN QUANG THAI\Top-up\Enterprise Web Software Development\Project\COMP1640\COMP1640\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.COMP1640.props
 D:\Greenwich\NGUYEN QUANG THAI\Top-up\Enterprise Web Software Development\Project\COMP1640\COMP1640\obj\Debug\net7.0\staticwebassets.pack.json
 D:\Greenwich\NGUYEN QUANG THAI\Top-up\Enterprise Web Software Development\Project\COMP1640\COMP1640\obj\Debug\net7.0\scopedcss\bundle\COMP1640.styles.css
-D:\Greenwich\NGUYEN QUANG THAI\Top-up\Enterprise Web Software Development\Project\COMP1640\COMP1640\obj\Debug\net7.0\COMP1640.csproj.CopyComplete
 D:\Greenwich\NGUYEN QUANG THAI\Top-up\Enterprise Web Software Development\Project\COMP1640\COMP1640\obj\Debug\net7.0\COMP1640.dll
 D:\Greenwich\NGUYEN QUANG THAI\Top-up\Enterprise Web Software Development\Project\COMP1640\COMP1640\obj\Debug\net7.0\refint\COMP1640.dll
 D:\Greenwich\NGUYEN QUANG THAI\Top-up\Enterprise Web Software Development\Project\COMP1640\COMP1640\obj\Debug\net7.0\COMP1640.pdb
 D:\Greenwich\NGUYEN QUANG THAI\Top-up\Enterprise Web Software Development\Project\COMP1640\COMP1640\obj\Debug\net7.0\COMP1640.genruntimeconfig.cache
 D:\Greenwich\NGUYEN QUANG THAI\Top-up\Enterprise Web Software Development\Project\COMP1640\COMP1640\obj\Debug\net7.0\ref\COMP1640.dll
+D:\Greenwich\NGUYEN QUANG THAI\Top-up\Enterprise Web Software Development\Project\COMP1640\COMP1640\obj\Debug\net7.0\COMP1640.sourcelink.json
+D:\Greenwich\NGUYEN QUANG THAI\Top-up\Enterprise Web Software Development\Project\COMP1640\COMP1640\obj\Debug\net7.0\COMP1640.csproj.Up2Date

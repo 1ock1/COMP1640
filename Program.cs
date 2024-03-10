@@ -12,10 +12,10 @@ builder.Services.AddSwaggerGen();
 
 RepositoryRegistration.AddRepositoryRegistration(builder.Services);
 builder.Services.AddDbContext<DataContext>();
-foreach (var service in builder.Services)
-{
-    Console.WriteLine($"Service Type: {service.ServiceType}, Lifetime: {service.Lifetime}");
-}
+//foreach (var service in builder.Services)
+//{
+//    Console.WriteLine($"Service Type: {service.ServiceType}, Lifetime: {service.Lifetime}");
+//}
 var app = builder.Build();
 
 // Only for stg

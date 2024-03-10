@@ -33,11 +33,10 @@ namespace COMP1640.Controllers
             })
             .ToArray();
         }
-        [HttpGet("GetHehe")]
-        public async Task<ActionResult<List<User>>> GetHehe()
+        [HttpGet("GetHoho")]
+        public string GetHoho()
         {
-            var result = await _userRepository.GetUser();
-            return StatusCode(200, result);
+            return "hohoho";
         }
     }
 }

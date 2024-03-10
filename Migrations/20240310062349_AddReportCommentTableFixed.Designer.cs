@@ -4,6 +4,7 @@ using COMP1640.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace COMP1640.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240310062349_AddReportCommentTableFixed")]
+    partial class AddReportCommentTableFixed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,44 +85,6 @@ namespace COMP1640.Migrations
                     b.HasIndex("ReportId");
 
                     b.ToTable("FileReports");
-                });
-
-            modelBuilder.Entity("COMP1640.Models.Notification", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FromUserId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsRead")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ToUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Notification");
                 });
 
             modelBuilder.Entity("COMP1640.Models.PublishedReport", b =>
@@ -327,17 +292,6 @@ namespace COMP1640.Migrations
                     b.Navigation("Report");
                 });
 
-            modelBuilder.Entity("COMP1640.Models.Notification", b =>
-                {
-                    b.HasOne("COMP1640.Models.User", "User")
-                        .WithMany("Notifications")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("COMP1640.Models.PublishedReport", b =>
                 {
                     b.HasOne("COMP1640.Models.Report", "Report")
@@ -450,8 +404,6 @@ namespace COMP1640.Migrations
 
             modelBuilder.Entity("COMP1640.Models.User", b =>
                 {
-                    b.Navigation("Notifications");
-
                     b.Navigation("ReportComments");
 
                     b.Navigation("Reports");

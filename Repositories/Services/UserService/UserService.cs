@@ -12,10 +12,5 @@ namespace COMP1640.Repositories.Services.UserService
         {
             this._dataContext = dataContext;
         }
-        public async Task<List<User>> GetUser()
-        {
-            var users = await this._dataContext.User.ToListAsync();
-            return users;
-        }
     }
 }

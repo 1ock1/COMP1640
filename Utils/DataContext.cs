@@ -17,6 +17,14 @@ namespace COMP1640.Utils
             optionsBuilder.UseSqlServer("Server=tcp:comp1640-prod.database.windows.net,1433;Initial Catalog=comp1640-prod;Persist Security Info=False;User ID=comp1640-prod;Password=Azuredb252;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
         }
+        public DbSet<Academic> Academics { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<Falcuty> Falcuties { get; set; }
+        public DbSet<FileReport> FileReports { get; set; }
+        public DbSet<Report> Reports { get; set; }
+        public DbSet<Topic> Topics { get; set; }
+        public DbSet<PublishedReport> PublishedReports { get; set; }
+        public DbSet<ReportComment> ReportComments { get; set; }
+        public DbSet<Notification> Notification { get; set; }
     }
 }
