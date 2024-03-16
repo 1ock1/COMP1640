@@ -2,8 +2,8 @@
 
 namespace COMP1640.Repositories.IRepositories
 {
-    public interface IUserRepository
+    public interface IAdminRepository
     {
-
+        public IEnumerable<User> GetAllUsers();
     }
 }
