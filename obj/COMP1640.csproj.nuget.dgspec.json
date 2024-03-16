@@ -61,6 +61,14 @@
               "target": "Package",
               "version": "[12.17.1, )"
             },
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[7.0.8, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.13, )"
@@ -102,6 +110,10 @@
               "version": "[24.2.9, )"
             },
             "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "System.Security.Permissions": {
               "target": "Package",
               "version": "[8.0.0, )"
             }
