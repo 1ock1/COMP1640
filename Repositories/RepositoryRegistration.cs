@@ -1,6 +1,8 @@
 ﻿using COMP1640.Repositories.IRepositories;
 using COMP1640.Repositories.Services.AuthService;
+using COMP1640.Repositories.Services.AdminService;
 using COMP1640.Repositories.Services.UserService;
+
 
 namespace COMP1640.Repositories
 {
@@ -10,6 +12,7 @@ namespace COMP1640.Repositories
         {
             services.AddScoped<IUserRepository, UserService>();
             services.AddScoped<IAuthRepository, AuthService>();
+            services.AddScoped<IAdminRepository, AdminService>();
         }
     }
 }
