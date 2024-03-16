@@ -3,5 +3,7 @@
   <PropertyGroup>
     <ActiveDebugProfile>https</ActiveDebugProfile>
     <NameOfLastUsedPublishProfile>D:\Greenwich\NGUYEN QUANG THAI\Top-up\Enterprise Web Software Development\Project\COMP1640\COMP1640\Properties\PublishProfiles\comp1640-stg - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
+    <Controller_SelectedScaffolderID>ApiControllerEmptyScaffolder</Controller_SelectedScaffolderID>
+    <Controller_SelectedScaffolderCategoryPath>root/Common/Api</Controller_SelectedScaffolderCategoryPath>
   </PropertyGroup>
 </Project>

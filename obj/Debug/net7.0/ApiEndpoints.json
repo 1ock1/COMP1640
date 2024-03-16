@@ -1,5 +1,69 @@
 [
   {
+    "ContainingType": "COMP1640.Controllers.UserController",
+    "Method": "CheckAuth",
+    "RelativePath": "api/User/auth",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "COMP1640.DTOs.TokenDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "COMP1640.Controllers.UserController",
+    "Method": "CheckEmail",
+    "RelativePath": "api/User/checkEmail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "COMP1640.Controllers.UserController",
+    "Method": "SignIn",
+    "RelativePath": "api/User/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userDTO",
+        "Type": "COMP1640.DTOs.UserDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "COMP1640.Controllers.UserController",
+    "Method": "CreateAccount",
+    "RelativePath": "api/User/signup",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "COMP1640.DTOs.UserSignUpDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "COMP1640.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",

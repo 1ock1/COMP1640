@@ -1,5 +1,8 @@
 using COMP1640.Repositories;
 using COMP1640.Utils;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NAaF1cXmhIfEx1RHxQdld5ZFRHallYTnNWUj0eQnxTdEFjWn9fcHdXQWBcUkFzVw==");
 var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "hehe";
@@ -8,8 +11,35 @@ var MyAllowSpecificOrigins = "hehe";
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
 
+    options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = "Issue Here",
+            ValidAudience = "Audiencce Here",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("This is my secret key a ah")),
+            ClockSkew = TimeSpan.FromSeconds(60)
+        };
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = context =>
+            {
+                if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+                {
+                    context.Response.Headers.Add("Token-Expired", "true");
+                }
+                return Task.CompletedTask;
+            }
+        };
+    });
+builder.Services.AddSwaggerGen();
+builder.Services.AddHttpContextAccessor();
 RepositoryRegistration.AddRepositoryRegistration(builder.Services);
 builder.Services.AddDbContext<DataContext>();
 //foreach (var service in builder.Services)
@@ -42,6 +72,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

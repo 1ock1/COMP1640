@@ -1,5 +1,6 @@
 using COMP1640.Models;
 using COMP1640.Repositories.IRepositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace COMP1640.Controllers
@@ -21,7 +22,7 @@ namespace COMP1640.Controllers
             _logger = logger;
             _userRepository = userRepository;
         }
-
+        [Authorize(Roles = "STUDENT")]
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
