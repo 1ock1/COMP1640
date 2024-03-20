@@ -24,6 +24,36 @@ namespace COMP1640.Controllers
             IEnumerable<User> users = _adminRepository.GetAllUsers();
             return users;
         }
+
+        [HttpGet("GetUserById")]
+        public User GetUserById(int id)
+        {
+            // Call the service to get user by id
+            User user = _adminRepository.GetUserById(id);
+            return user;
+        }
+
+        [HttpPut("UpdateUser")]
+        public IActionResult  UpdateUser(int id, UpdateUserDto user)
+        {
+            // Call the service to update user
+            
+            User userInformation = _adminRepository.GetUserById(id);
+            userInformation.Name =userInformation.Name ?? user.Name;
+            userInformation.PhoneNumber = user.PhoneNumber;
+            userInformation.BirthDate = user.BirthDate;
+            userInformation.Email = user.Email;
+            userInformation.Password = user.Password;
+               
+            userInformation.Status = user.Status;
+
+            return _adminRepository.UpdateUser(userInformation);
+          
+                       
+
+            
+        }
+        
         
     }
 }

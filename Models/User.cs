@@ -17,4 +17,18 @@
         public List<ReportComment> ReportComments { get; set; }
         public List<Notification> Notifications { get; set; }
     }
+
+    public class UpdateUserDto
+    {
+        public string Name { get; set; }
+        public string PhoneNumber { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+           
+        
+        public string Status { get; set; }
+
+    }   
+
 }
