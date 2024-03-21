@@ -10,4 +10,13 @@ namespace COMP1640.Repositories.IRepositories
         public User GetUserById(int id);
         public string UpdateUser(User user);
     }
+
+    public interface FacultyManagementAPI
+    {
+        public IEnumerable<Faculty> GetAllFaculties();
+
+        public IEnumerable<Faculty> GetFacultyByID(int id);
+
+
+    }
 }
