@@ -1,6 +1,7 @@
 ﻿using COMP1640.Models;
 using COMP1640.Repositories.IRepositories;
 using COMP1640.Utils;
+using Microsoft.AspNetCore.Mvc;
 
 namespace COMP1640.Repositories.Services.AdminService
 {
@@ -16,6 +17,19 @@ namespace COMP1640.Repositories.Services.AdminService
         {
             return _dataContext.User.ToList();
                                     
+        }
+
+        public User GetUserById(int id)
+        {
+            return _dataContext.User.Find(id);
+        }
+
+
+        public IActionResult UpdateUser(User user)
+        {
+            _dataContext.User.Update(user);
+            _dataContext.SaveChanges();
+            return new OkResult();
         }
     }
 }
