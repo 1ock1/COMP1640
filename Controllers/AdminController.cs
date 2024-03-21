@@ -1,4 +1,5 @@
-﻿using COMP1640.Models;
+﻿using COMP1640.DTOs;
+using COMP1640.Models;
 using COMP1640.Repositories.IRepositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,63 +26,31 @@ namespace COMP1640.Controllers
             return users;
         }
 
-        private readonly FacultyManagementAPI _facultyManagementAPI;
-
-        public AdminController(FacultyManagementAPI facultyManagementAPI)
+        [HttpGet("GetUserById")]
+        public User GetUserById(int id)
         {
-            _facultyManagementAPI = facultyManagementAPI;
+            // Call the service to get user by id
+            User user = _adminRepository.GetUserById(id);
+            return user;
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<Faculty>> GetAllFaculties()
+        [HttpPut("UpdateUser")]
+        public IActionResult UpdateUser(int id, UserUpdateDTO user)
         {
-            return _facultyManagementAPI.GetAllFaculties().ToList();
+            // Call the service to update user
+
+            User userInformation = _adminRepository.GetUserById(id);
+
+        
+            userInformation.Name =  user.Name;
+            userInformation.PhoneNumber = user.PhoneNumber;
+            userInformation.BirthDate = user.BirthDate;
+            userInformation.Email = user.Email;
+            userInformation.Password = user.Password;
+            userInformation.Status = user.Status;
+
+            return _adminRepository.UpdateUser(userInformation);
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<Faculty> GetFacultyById(int id)
-        {
-            var faculty = _facultyManagementAPI.GetFacultyById(id);
-            if (faculty == null)
-            {
-                return NotFound();
-            }
-            return faculty;
-        }
-
-        [HttpPost]
-        public IActionResult CreateFaculty([FromBody] Faculty faculty)
-        {
-            _facultyManagementAPI.CreateFaculty(faculty.Name, faculty.Department);
-            return CreatedAtAction(nameof(GetFacultyById), new { id = faculty.Id }, faculty);
-        }
-
-        [HttpPut("{id}")]
-        public IActionResult UpdateFaculty(int id, [FromBody] Faculty faculty)
-        {
-            try
-            {
-                _facultyManagementAPI.UpdateFaculty(id, faculty.Name, faculty.Department);
-            }
-            catch (ArgumentException)
-            {
-                return NotFound();
-            }
-            return NoContent();
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult DeleteFaculty(int id)
-        {
-            try
-            {
-                _facultyManagementAPI.DeleteFaculty(id);
-            }
-            catch (ArgumentException)
-            {
-                return NotFound();
-            }
-            return NoContent();
-        }
     }
 }
