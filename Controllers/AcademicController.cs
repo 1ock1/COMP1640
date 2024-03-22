@@ -34,25 +34,26 @@ namespace COMP1640.Controllers
         }
 
         [HttpPost("CreateAcademic")]
-        public IActionResult CreateAcademic(CreateAcademic academic)
+        public Academic CreateAcademic(CreateAcademic academic)
         {
             Academic newAcademic = new Academic();
 
             newAcademic.StartDate = academic.StartDate;
             newAcademic.EndDate = academic.EndDate;
 
-
-            return _academicRepository.CreateAcademic(newAcademic);
+            _academicRepository.CreateAcademic(newAcademic);
+            return newAcademic ;
         }
 
         [HttpPut("UpdateAcademic")]
-        public IActionResult UpdateAcademic(int id, UpdateAcademic academic)
+        public Academic UpdateAcademic(int id, UpdateAcademic academic)
         {
             Academic academicInformation = _academicRepository.GetAcademicById(id);
             academicInformation.StartDate = academic.StartDate;
             academicInformation.EndDate = academic.EndDate;
 
-            return _academicRepository.UpdateAcademic(id, academicInformation);
+            _academicRepository.UpdateAcademic(id, academicInformation);
+            return academicInformation;
         }
     }
 }

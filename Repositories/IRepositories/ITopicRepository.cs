@@ -7,8 +7,8 @@ namespace COMP1640.Repositories.IRepositories
     {
         public IEnumerable<Topic> GetAllTopics();
         public Topic GetTopicById(int id);
-        public IActionResult CreateTopic(Topic topic);
-        public IActionResult UpdateTopic(Topic topic);
+        public string CreateTopic(Topic topic);
+        public string UpdateTopic(Topic topic);
         public IActionResult DeleteTopic(int id);
 
     }
