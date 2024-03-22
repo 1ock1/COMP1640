@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 using COMP1640.Models;
 using COMP1640.Repositories.IRepositories;
 
@@ -15,14 +17,14 @@ namespace COMP1640.Controllers
             this._facultyRepository = facultyRepository;
         }
 
-        [HttpGet("GetAllFaculty")]
-        public IEnumerable<Faculty> GetAllFaculty()
+        [HttpGet]
+        public IEnumerable<Faculty> GetAllFaculties()
         {
-            IEnumerable<Faculty> Faculty = _facultyRepository.GetAllFaculty();
-            return Faculty;
+            IEnumerable<Faculty> faculties = _facultyRepository.GetAllFaculties();
+            return faculties;
         }
 
-        [HttpGet("GetFacultyById")]
+        [HttpGet("{id}")]
         public IActionResult GetFacultyById(int id)
         {
             Faculty faculty = _facultyRepository.GetFacultyById(id);
@@ -40,7 +42,7 @@ namespace COMP1640.Controllers
             return CreatedAtAction(nameof(GetFacultyById), new { id = faculty.Id }, faculty);
         }
 
-        [HttpPut("UpdateFaculty")]
+        [HttpPut("{id}")]
         public IActionResult UpdateFaculty(int id, Faculty faculty)
         {
             Faculty existingFaculty = _facultyRepository.GetFacultyById(id);
@@ -59,7 +61,7 @@ namespace COMP1640.Controllers
             return NoContent();
         }
 
-        [HttpDelete("DeleteFaculty")]
+        [HttpDelete("{id}")]
         public IActionResult DeleteFaculty(int id)
         {
             Faculty faculty = _facultyRepository.GetFacultyById(id);
