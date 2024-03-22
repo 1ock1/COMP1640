@@ -25,11 +25,11 @@ namespace COMP1640.Repositories.Services.AdminService
         }
 
 
-        public IActionResult UpdateUser(User user)
+        public string UpdateUser(User user)
         {
             _dataContext.User.Update(user);
             _dataContext.SaveChanges();
-            return new OkResult();
+            return "new OkResult()";
         }
     }
 }
