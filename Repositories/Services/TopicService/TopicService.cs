@@ -21,9 +21,11 @@ namespace COMP1640.Repositories.Services.TopicService
             return "oke nhes";
         }
 
-        public IActionResult DeleteTopic(int id)
+        public string DeleteTopic(int id)
         {
-            throw new NotImplementedException();
+            _datacontex.Topics.Remove(_datacontex.Topics.Find(id));
+            _datacontex.SaveChanges();
+            return " xoaed";
         }
 
         public IEnumerable<Topic> GetAllTopics()

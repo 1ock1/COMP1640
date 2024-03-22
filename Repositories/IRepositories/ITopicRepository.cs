@@ -9,7 +9,7 @@ namespace COMP1640.Repositories.IRepositories
         public Topic GetTopicById(int id);
         public string CreateTopic(Topic topic);
         public string UpdateTopic(Topic topic);
-        public IActionResult DeleteTopic(int id);
+        public string DeleteTopic(int id);
 
     }
 }
