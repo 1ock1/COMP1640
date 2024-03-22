@@ -8,6 +8,6 @@ namespace COMP1640.Repositories.IRepositories
     {
         public IEnumerable<User> GetAllUsers();
         public User GetUserById(int id);
-        IActionResult UpdateUser(User user);
+        public string UpdateUser(User user);
     }
 }

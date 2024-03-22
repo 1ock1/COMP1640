@@ -7,8 +7,8 @@ namespace COMP1640.Repositories.IRepositories
     {
         public IEnumerable<Academic> GetAllAcademics();
         public Academic GetAcademicById(int id);
-        public IActionResult CreateAcademic(Academic academic);
-        public IActionResult UpdateAcademic(int id, Academic academic);
+        public string CreateAcademic(Academic academic);
+        public string UpdateAcademic(int id, Academic academic);
         public IActionResult DeleteAcademic(int id);
 
     }
