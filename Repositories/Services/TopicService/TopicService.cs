@@ -13,12 +13,12 @@ namespace COMP1640.Repositories.Services.TopicService
             this._datacontex = datacontex;
         }
 
-        public IActionResult CreateTopic(Topic topic)
+        public string CreateTopic(Topic topic)
         {
 
             _datacontex.Topics.Add(topic);
             _datacontex.SaveChanges();
-            return new OkResult();
+            return "oke nhes";
         }
 
         public IActionResult DeleteTopic(int id)
@@ -37,12 +37,12 @@ namespace COMP1640.Repositories.Services.TopicService
             return _datacontex.Topics.Find(id);
         }
 
-        public IActionResult UpdateTopic(Topic topic)
+        public string UpdateTopic(Topic topic)
         {
 
             _datacontex.Topics.Update(topic);
             _datacontex.SaveChanges();
-            return new OkResult();
+            return "thanh_cong";
         }
 
     }

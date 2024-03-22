@@ -13,11 +13,11 @@ namespace COMP1640.Repositories.Services.AcademicService
             this._datacontex = datacontex;
         }
 
-        public IActionResult CreateAcademic(Academic academic)
+        public string CreateAcademic(Academic academic)
         {
             _datacontex.Academics.Add(academic);
             _datacontex.SaveChanges();
-            return new OkResult();
+            return "OK nhes";
         }
 
         public IActionResult DeleteAcademic(int id)
@@ -35,11 +35,11 @@ namespace COMP1640.Repositories.Services.AcademicService
             return _datacontex.Academics.Find(id);
         }
 
-        public IActionResult UpdateAcademic(int id, Academic academic)
+        public string UpdateAcademic(int id, Academic academic)
         {
             _datacontex.Academics.Update(academic);
             _datacontex.SaveChanges();
-            return new OkResult();
+            return "ok nhe";
         }
 
     }

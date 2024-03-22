@@ -35,7 +35,7 @@ namespace COMP1640.Controllers
         }
 
         [HttpPut("UpdateUser")]
-        public IActionResult UpdateUser(int id, UserUpdateDTO user)
+        public User UpdateUser(int id, UserUpdateDTO user)
         {
             // Call the service to update user
 
@@ -49,7 +49,8 @@ namespace COMP1640.Controllers
             userInformation.Password = user.Password;
             userInformation.Status = user.Status;
 
-            return _adminRepository.UpdateUser(userInformation);
+            _adminRepository.UpdateUser(userInformation);
+            return userInformation;
         }
 
     }
