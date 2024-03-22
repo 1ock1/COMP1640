@@ -36,7 +36,7 @@ namespace COMP1640.Controllers
         }
 
         [HttpPost("CreateTopic")]
-        public IActionResult CreateTopic(CreateTopic topic)
+        public Topic CreateTopic(CreateTopic topic)
         {
             // Call the service to create topic
             Topic createTopic = new Topic();
@@ -47,15 +47,13 @@ namespace COMP1640.Controllers
 
             createTopic.FalcutyId = 1;
             createTopic.AcademicId = 1;
+            _topicRepository.CreateTopic(createTopic);
 
-
-
-
-            return _topicRepository.CreateTopic(createTopic);
+            return createTopic;
         }
 
         [HttpPut("UpdateTopic")]
-        public IActionResult UpdateTopic(int id, UpdateTopic topic)
+        public Topic UpdateTopic(int id, UpdateTopic topic)
         {
             // Call the service to update topic
             Topic topicInformation = _topicRepository.GetTopicById(id);
@@ -63,7 +61,10 @@ namespace COMP1640.Controllers
             topicInformation.Description = topic.Description ?? topicInformation.Description;
             topicInformation.EntriesDate = topic.FinalDate;
             topicInformation.FinalDate = topic.FinalDate;
-            return _topicRepository.UpdateTopic(topicInformation);
+
+            _topicRepository.UpdateTopic(topicInformation);
+
+            return topicInformation;
         }
 
         [HttpDelete("DeleteTopic")]
