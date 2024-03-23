@@ -5,6 +5,8 @@ using COMP1640.Repositories.Services.UserService;
 using COMP1640.Services;
 using COMP1640.Repositories.Services.TopicService;
 using COMP1640.Repositories.Services.AcademicService;
+using COMP1640.Repositories.Services.FilesService;
+using COMP1640.Repositories.Services.ReportRepository;
 
 
 namespace COMP1640.Repositories
@@ -19,6 +21,8 @@ namespace COMP1640.Repositories
             services.AddScoped<IFacultyRepository, FacultyService>();
             services.AddScoped<ITopicRepository,TopicService>();
             services.AddScoped<IAcademicRepository, AcademicService>();
+            services.AddScoped<IFileRepository, FileServices>();
+            services.AddScoped<IReportRepository, ReportServices>();
         }
     }
 }
