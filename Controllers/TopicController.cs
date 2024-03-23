@@ -69,10 +69,12 @@ namespace COMP1640.Controllers
 
         [HttpDelete("DeleteTopic")]
 
-        public IActionResult DeleteTopic(int id)
+        public Topic DeleteTopic(int id)
         {
+           Topic deleteTopic= _topicRepository.GetTopicById(id);
+             _topicRepository.DeleteTopic(id);
             // Call the service to delete topic
-            return _topicRepository.DeleteTopic(id);
+            return deleteTopic;
         }
     }
 }
