@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using COMP1640.Models;
 using COMP1640.Repositories.IRepositories;
+using COMP1640.DTOs;
 
 namespace COMP1640.Controllers
 {
@@ -18,16 +19,16 @@ namespace COMP1640.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Faculty> GetAllFaculties()
+        public IEnumerable<Falcuty> GetAllFaculties()
         {
-            IEnumerable<Faculty> faculties = _facultyRepository.GetAllFaculties();
+            IEnumerable<Falcuty> faculties = _facultyRepository.GetAllFaculties();
             return faculties;
         }
 
         [HttpGet("{id}")]
         public IActionResult GetFacultyById(int id)
         {
-            Faculty faculty = _facultyRepository.GetFacultyById(id);
+            Falcuty faculty = _facultyRepository.GetFacultyById(id);
             if (faculty == null)
             {
                 return NotFound();
@@ -36,16 +37,19 @@ namespace COMP1640.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateFaculty(Faculty faculty)
+        public Falcuty CreateFaculty(CreateFacultyDto faculty)
         {
-            _facultyRepository.CreateFaculty(faculty);
-            return CreatedAtAction(nameof(GetFacultyById), new { id = faculty.Id }, faculty);
+            Falcuty newFaculty = new Falcuty();
+            newFaculty.Name = faculty.Name;
+            newFaculty.Status = faculty.Status;
+            _facultyRepository.CreateFaculty(newFaculty);
+            return newFaculty;
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateFaculty(int id, Faculty faculty)
+        public IActionResult UpdateFaculty(int id, EditFacultyDto faculty)
         {
-            Faculty existingFaculty = _facultyRepository.GetFacultyById(id);
+            Falcuty existingFaculty = _facultyRepository.GetFacultyById(id);
             if (existingFaculty == null)
             {
                 return NotFound();
@@ -53,7 +57,7 @@ namespace COMP1640.Controllers
 
             existingFaculty.Name = faculty.Name;
             existingFaculty.Status = faculty.Status;
-            existingFaculty.Id = faculty.Id;
+                      
 
             // Update other properties as needed
 
@@ -64,7 +68,7 @@ namespace COMP1640.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteFaculty(int id)
         {
-            Faculty faculty = _facultyRepository.GetFacultyById(id);
+            Falcuty faculty = _facultyRepository.GetFacultyById(id);
             if (faculty == null)
             {
                 return NotFound();
