@@ -1,4 +1,6 @@
-﻿namespace COMP1640.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace COMP1640.Models
 {
     public class Report
     {
@@ -9,9 +11,10 @@
         public int TopicId { get; set; }
         public Topic Topic { get; set; }
         public int StudentId { get; set; }
+        [ForeignKey("StudentId")]
         public User User { get; set; }
-        public List<FileReport> FileReports { get; set; }
-        public List<PublishedReport> PublishedReports { get; set; }
-        public List<ReportComment> ReportComments { get; set; }
+        public virtual List<FileReport> FileReports { get; set; }
+        public virtual List<PublishedReport> PublishedReports { get; set; }
+        public virtual List<ReportComment> ReportComments { get; set; }
     }
 }
