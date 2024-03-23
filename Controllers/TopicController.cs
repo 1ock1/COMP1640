@@ -71,7 +71,10 @@ namespace COMP1640.Controllers
         [HttpDelete("DeleteTopic")]
 
         public Topic DeleteTopic(int id)
+        public Topic DeleteTopic(int id)
         {
+           Topic deleteTopic= _topicRepository.GetTopicById(id);
+             _topicRepository.DeleteTopic(id);
            Topic deleteTopic= _topicRepository.GetTopicById(id);
              _topicRepository.DeleteTopic(id);
             // Call the service to delete topic

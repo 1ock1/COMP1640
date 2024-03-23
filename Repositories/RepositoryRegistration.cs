@@ -10,6 +10,7 @@ using COMP1640.Repositories.Services.FileReportRepository;
 using COMP1640.Repositories.Services.NotificationServices;
 using COMP1640.Repositories.Services.ReportCommentServices;
 using COMP1640.Repositories.Services.PublishedReportServices;
+using COMP1640.Services;
 
 
 namespace COMP1640.Repositories
@@ -29,6 +30,7 @@ namespace COMP1640.Repositories
             services.AddScoped<INotificationRepository, NotificationService>();
             services.AddScoped<IReportCommentRepository, ReportCommentServices>();
             services.AddScoped<IPublishedReportRepository, PublishedReportService>();
+            services.AddScoped<IFacultyRepository, FacultyService>();
         }
     }
 }
