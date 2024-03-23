@@ -69,12 +69,15 @@ namespace COMP1640.Controllers
         }
 
         [HttpDelete("DeleteTopic")]
-        public string DeleteTopic(int id)
-        {
-            _topicRepository.DeleteTopic(id);
-            return "Delete SuccessFully";
-        }
 
+        public Topic DeleteTopic(int id)
+        {
+           Topic deleteTopic= _topicRepository.GetTopicById(id);
+             _topicRepository.DeleteTopic(id);
+            // Call the service to delete topic
+            return deleteTopic;
+        }
+        
         [HttpPost("GetTopicsByAcademicAndFalcuty")]
         public ActionResult GetTopicsByAcademicAndFalcuty(CurrentTopicsDTORequest dto)
         {
