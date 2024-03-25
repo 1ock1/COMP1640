@@ -1,65 +1,69 @@
 ﻿using COMP1640.Models;
 using COMP1640.Repositories.IRepositories;
-using COMP1640.DTOs;
+using COMP1640.Utils;
 using System;
 using System.Collections.Generic;
 
-namespace COMP1640.Services {
-            public class FacultyService
-            {
-                private readonly IFacultyRepository _facultyRepository;
+namespace COMP1640.Services
+{
+    public class FacultyService : IFacultyRepository
+    {
+        private readonly DataContext _dataContext;
 
-                public FacultyService(IFacultyRepository facultyRepository)
-                {
-                    _facultyRepository = facultyRepository;
-                }
+        public FacultyService(DataContext dataContext)
+        {
+            this._dataContext = dataContext;
+        }
 
-                public IEnumerable<Faculty> GetAllFaculties()
-                {
-                    return _facultyRepository.GetAllFaculties();
-                }
+        public IEnumerable<Faculty> GetAllFaculty()
+        {
+            return _dataContext.Faculty;
+        }
 
-                public Faculty GetFacultyById(int id)
-                {
-                    return _facultyRepository.GetFacultyById(id);
-                }
+        public Faculty GetFacultyById(int id)
+        {
+            return _dataContext.Faculty.Find(id);
+        }
 
-                public void CreateFaculty(CreateFacultyDto facultyDto)
-                {
-                    // You can add business logic/validation here before creating faculty
-                    var faculty = new Faculty
-                    {
-                        Id = facultyDto.Id,
-                        Name = facultyDto.Name,
-                        Status = facultyDto.Status,
+        public Faculty CreateFaculty(Faculty faculty)
+        {
+            if (faculty == null)
+                throw new ArgumentNullException(nameof(faculty));
 
-                        // Map other properties as needed
-                    };
-                    _facultyRepository.CreateFaculty(faculty);
-                }
+            _dataContext.Faculty.Add(faculty);
+            _dataContext.SaveChanges();
 
-                public void UpdateFaculty(int id, EditFacultyDto facultyDto)
-                {
-                    // You can add business logic/validation here before updating faculty
-                    var existingFaculty = _facultyRepository.GetFacultyById(id);
-                    if (existingFaculty == null)
-                    {
-                        throw new ArgumentException("Faculty not found");
-                    }
+            return faculty;
+        }
 
-                    existingFaculty.Name = facultyDto.Name;
-                    existingFaculty.Id = facultyDto.Id;
-                    existingFaculty.Status = facultyDto.Status;
-                    existingFaculty.Description = facultyDto.Description;
-                    // Map other properties as needed
+        public Faculty UpdateFaculty(int id, Faculty faculty)
+        {
+            if (faculty == null)
+                throw new ArgumentNullException(nameof(faculty));
 
-                    _facultyRepository.UpdateFaculty(id, existingFaculty);
-                }
+            var existingFaculty = _dataContext.Faculty.Find(id);
+            if (existingFaculty == null)
+                throw new KeyNotFoundException("Faculty not found");
 
-                public void DeleteFaculty(int id)
-                {
-                    // You can add business logic/validation here before deleting faculty
-                    _facultyRepository.DeleteFaculty(id);
-                }
-            }
+            // Update faculty properties
+            existingFaculty.Name = faculty.Name;
+            // Update other properties as needed
+
+            _dataContext.SaveChanges();
+
+            return existingFaculty;
+        }
+
+        public bool DeleteFaculty(int id)
+        {
+            var faculty = _dataContext.Faculty.Find(id);
+            if (faculty == null)
+                return false;
+
+            _dataContext.Faculty.Remove(faculty);
+            _dataContext.SaveChanges();
+
+            return true;
+        }
+    }
 }

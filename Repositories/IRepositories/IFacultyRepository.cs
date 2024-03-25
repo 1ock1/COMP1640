@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
-using COMP1640.Models;
+﻿using COMP1640.Models;
+using System.Collections.Generic;
 
 namespace COMP1640.Repositories.IRepositories
 {
     public interface IFacultyRepository
     {
-        IEnumerable<Faculty> GetAllFaculties();
+        IEnumerable<Faculty> GetAllFaculty();
         Faculty GetFacultyById(int id);
-        void CreateFaculty(Faculty faculty);
-        void UpdateFaculty(int id, Faculty faculty);
-        void DeleteFaculty(int id);
+        Faculty CreateFaculty(Faculty faculty);
+        Faculty UpdateFaculty(int id, Faculty faculty);
+        bool DeleteFaculty(int id);
     }
 }
+
