@@ -1,4 +1,7 @@
-﻿namespace COMP1640.Repositories.IRepositories
+﻿using COMP1640.DTOs;
+using COMP1640.Models;
+
+namespace COMP1640.Repositories.IRepositories
 {
     public interface IFileRepository
     {
@@ -10,7 +13,7 @@
         public Task<string> RetrieveContentBlob(string file);
         public Task<string> RetrieveDocument(string file);
         public Task<string> RetrieveDocumentCC2();
-        public void SaveDocument(IFormCollection data);
-        public Task<string> UploadMultipleImages(List<IFormFile> files);
+        public void SaveDocument(SaveFileDTO dto);
+        public Task<string> UploadMultipleImages(List<FileReportDTO> listFileReport);
     }
 }
