@@ -5,5 +5,6 @@ namespace COMP1640.Repositories.IRepositories
     public interface IReportRepository
     {
         public Task<string> CreateReportFirstTime(int topicId, int studentId, string filename, string type);
+        public Task<int> IsReportExistWithTopicId(ReportDTO reportDTO);
     }
 }

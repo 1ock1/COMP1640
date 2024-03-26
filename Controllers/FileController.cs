@@ -12,10 +12,12 @@ namespace COMP1640.Controllers
     {
         private readonly IFileRepository _fileReporitory;
         private readonly IReportRepository _reportReporitory;
-        public FileController(IFileRepository fileReporitory, IReportRepository reportRepository)
+        private readonly IFileReportRepository _fileReportRepository;
+        public FileController(IFileRepository fileReporitory, IReportRepository reportRepository, IFileReportRepository fileReportRepository)
         {
             this._fileReporitory = fileReporitory;
-            this._reportReporitory= reportRepository;
+            this._reportReporitory = reportRepository;
+            _fileReportRepository = fileReportRepository;
         }
         [HttpPost("CreateShareFile")]
         public async Task<ActionResult> CreateShareFile(string containerName)
@@ -33,7 +35,7 @@ namespace COMP1640.Controllers
             Console.WriteLine(guid);
             var result = await _fileReporitory.UploadFile(form.File, sb.ToString());
             Console.WriteLine(result);
-            return StatusCode(200, result);
+            return StatusCode(200, guid);
         }
         [HttpDelete("{file}")]
         public async Task<ActionResult> DeleteFile(string file)
@@ -55,16 +57,26 @@ namespace COMP1640.Controllers
         }
         [HttpPost("SaveDocument")]
         [Microsoft.AspNetCore.Cors.EnableCors("hehe")]
-        public async Task<ActionResult> SaveDocument(IFormCollection data)
+        public async Task<ActionResult> SaveDocument([FromForm] SaveFileDTO dto)
         {
-            _fileReporitory.SaveDocument(data);
+            Console.WriteLine(dto.Name);
+            _fileReporitory.SaveDocument(dto);
             return StatusCode(200, "Success");
         }
         [HttpPost("UploadImages")]
-        public async Task<ActionResult> UploadImages(List<IFormFile> files)
+        public async Task<ActionResult> UploadImages([FromForm] UploadImagesDTO dto)
         {
-            Console.WriteLine(files.Count);
-            var result = await this._fileReporitory.UploadMultipleImages(files);
+            Console.WriteLine(dto.Files.Count);
+            Console.WriteLine(dto.ReportId);
+            var listReports = await this._fileReportRepository.UploadImagesInDatabase(dto);
+            var result = await this._fileReporitory.UploadMultipleImages(listReports);
+            return StatusCode(200, result);
+        }
+
+        [HttpPost("IsReportSubmitted")]
+        public async Task<ActionResult> IsReportSubmmited(ReportDTO dto)
+        {
+            var result = await this._reportReporitory.IsReportExistWithTopicId(dto);
             return StatusCode(200, result);
         }
     }

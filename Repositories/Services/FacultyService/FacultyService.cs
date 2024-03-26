@@ -50,7 +50,6 @@ namespace COMP1640.Services {
                     existingFaculty.Name = facultyDto.Name;
                     existingFaculty.Id = facultyDto.Id;
                     existingFaculty.Status = facultyDto.Status;
-                    existingFaculty.Description = facultyDto.Description;
                     // Map other properties as needed
 
                     _facultyRepository.UpdateFaculty(id, existingFaculty);
