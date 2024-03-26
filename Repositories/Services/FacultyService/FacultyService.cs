@@ -44,6 +44,7 @@ namespace COMP1640.Services
             return "Faculty updated successfully";
         }
 
+                    // Map other properties as needed
 
 
     }

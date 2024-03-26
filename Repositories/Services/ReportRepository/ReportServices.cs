@@ -61,5 +61,15 @@ namespace COMP1640.Repositories.Services.ReportRepository
                 return "false";
             }
         }
+
+        public async Task<int> IsReportExistWithTopicId(ReportDTO reportDTO)
+        {
+            var row = this.dataContext.Reports.FirstOrDefault(rp => rp.TopicId == reportDTO.TopicId && rp.StudentId == reportDTO.StudentId);
+            if(row == null)
+            {
+                return -1;
+            }
+            return row.Id;
+        }
     }
 }

@@ -7,6 +7,7 @@ using COMP1640.Repositories.Services.ReportRepository;
 using COMP1640.Repositories.Services.TopicService;
 using COMP1640.Repositories.Services.AcademicService;
 using COMP1640.Services;
+using COMP1640.Repositories.Services.FileReportRepository;
 
 
 namespace COMP1640.Repositories
@@ -23,6 +24,7 @@ namespace COMP1640.Repositories
             services.AddScoped<ITopicRepository,TopicService>();
             services.AddScoped<IAcademicRepository, AcademicService>();
             services.AddScoped<IFacultyRepository, FacultyService>();
+            services.AddScoped<IFileReportRepository, FileReportServices>();
         }
     }
 }
