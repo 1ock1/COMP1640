@@ -8,6 +8,8 @@ using Syncfusion.EJ2.DocumentEditor;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.IO;
 using Azure.Core;
+using COMP1640.DTOs;
+using COMP1640.Models;
 
 namespace COMP1640.Repositories.Services.FilesService
 {
@@ -60,6 +62,13 @@ namespace COMP1640.Repositories.Services.FilesService
         {
             var blobServiceClient = new BlobServiceClient(this.connectionString);
             var fileContainer = blobServiceClient.GetBlobContainerClient("hehe");
+            var result = await this._dataContext.FileReports.FindAsync(file);
+            if (result == null)
+            {
+                return "Not Found";
+            }
+            this._dataContext.FileReports.Remove(result);
+            await this._dataContext.SaveChangesAsync();
             BlobClient client = fileContainer.GetBlobClient(file);
             await client.DeleteAsync();
             return "Deleted Successfully";
@@ -114,11 +123,11 @@ namespace COMP1640.Repositories.Services.FilesService
             }
             return "";
         }
-        public async void SaveDocument(IFormCollection data)
+        public async void SaveDocument(SaveFileDTO dto)
         {
-            if (data.Files.Count == 0)
+            if (dto.data.Files.Count == 0)
                 return;
-            Console.WriteLine(data.Files[0]);
+            Console.WriteLine(dto.data.Files[0]);
             try
             {
                 BlobClientOptions blobOptions = new BlobClientOptions()
@@ -134,10 +143,10 @@ namespace COMP1640.Repositories.Services.FilesService
                 BlobServiceClient blobServiceClient = new BlobServiceClient(this.connectionString, blobOptions);
                 BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient("hehe");
 
-                IFormFile file = data.Files[0];
+                IFormFile file = dto.data.Files[0];
 
                 // Get a reference to the blob
-                BlobClient blobClient = containerClient.GetBlobClient("44c54879-c7bc-4d53-99dd-fd9e45c2298b.docx");
+                BlobClient blobClient = containerClient.GetBlobClient(dto.Name);
                 using (Stream stream = file.OpenReadStream())
                 {
                     await blobClient.UploadAsync(stream, true);
@@ -150,20 +159,20 @@ namespace COMP1640.Repositories.Services.FilesService
 
         }
 
-        public async Task<string> UploadMultipleImages(List<IFormFile> files)
+        public async Task<string> UploadMultipleImages(List<FileReportDTO> listFileReport)
         {
             try
             {
-                if (files == null || !files.Any())
+                if (listFileReport == null || !listFileReport.Any())
                 {
                     return "Not Found";
                 }
                 var blobServiceClient = new BlobServiceClient(this.connectionString);
                 var fileContainer = blobServiceClient.GetBlobContainerClient("hehe");
-                foreach (IFormFile file in files)
+                foreach (FileReportDTO dto in listFileReport)
                 {
-                    BlobClient client = fileContainer.GetBlobClient(file.FileName);
-                    using (Stream stream = file.OpenReadStream())
+                    BlobClient client = fileContainer.GetBlobClient(dto.Id);
+                    using (Stream stream = dto.File.OpenReadStream())
                     {
                         await client.UploadAsync(stream, true);
                     }
