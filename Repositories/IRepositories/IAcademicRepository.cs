@@ -9,7 +9,7 @@ namespace COMP1640.Repositories.IRepositories
         public Academic GetAcademicById(int id);
         public string CreateAcademic(Academic academic);
         public string UpdateAcademic(int id, Academic academic);
-        public IActionResult DeleteAcademic(int id);
+        public string DeleteAcademic(int id);
 
     }
 }

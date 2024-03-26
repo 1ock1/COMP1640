@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using static COMP1640.DTOs.TopicDTOs;
 
+
 namespace COMP1640.Controllers
 {
     [Route("api/[controller]")]
@@ -11,10 +12,15 @@ namespace COMP1640.Controllers
     public class TopicController : ControllerBase
     {
         private readonly ITopicRepository _topicRepository;
+        private readonly IFacultyRepository _falcutyRepository;
+        private readonly IAcademicRepository _academicRepository;
 
-        public TopicController(ITopicRepository topicRepository)
+        public TopicController(ITopicRepository topicRepository, IFacultyRepository facultyRepository, IAcademicRepository academicRepository)
         {
-            this._topicRepository = topicRepository;
+            _topicRepository = topicRepository;
+            _falcutyRepository = facultyRepository;
+            _academicRepository = academicRepository;
+            
         }
 
 
@@ -42,13 +48,14 @@ namespace COMP1640.Controllers
             Topic createTopic = new Topic();
             createTopic.Name = topic.Name;
             createTopic.Description = topic.Description;
-            createTopic.EntriesDate = topic.FinalDate;
+            createTopic.EntriesDate = topic.EntriesDate;
             createTopic.FinalDate = topic.FinalDate;
 
-            createTopic.FalcutyId = 1;
-            createTopic.AcademicId = 1;
+            createTopic.FalcutyId = topic.FalcutyId;
+            createTopic.AcademicId = topic.AcademicId;
+                                           
             _topicRepository.CreateTopic(createTopic);
-
+                    
             return createTopic;
         }
 
@@ -57,8 +64,8 @@ namespace COMP1640.Controllers
         {
             // Call the service to update topic
             Topic topicInformation = _topicRepository.GetTopicById(id);
-            topicInformation.Name = topic.Name ?? topicInformation.Name;
-            topicInformation.Description = topic.Description ?? topicInformation.Description;
+            topicInformation.Name = topic.Name;
+            topicInformation.Description = topic.Description ;
             topicInformation.EntriesDate = topic.FinalDate;
             topicInformation.FinalDate = topic.FinalDate;
 

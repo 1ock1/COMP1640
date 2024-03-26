@@ -20,9 +20,11 @@ namespace COMP1640.Repositories.Services.AcademicService
             return "OK nhes";
         }
 
-        public IActionResult DeleteAcademic(int id)
+        public string DeleteAcademic(int id)
         {
-            throw new NotImplementedException();
+            _datacontex.Academics.Remove(_datacontex.Academics.Find(id));
+            _datacontex.SaveChanges();
+            return "deleted";
         }
 
         public IEnumerable<Academic> GetAllAcademics()

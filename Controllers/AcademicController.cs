@@ -17,7 +17,7 @@ namespace COMP1640.Controllers
             this._academicRepository = academicRepository;
         }
 
-        [HttpGet("GetAllAcademic")]
+        [HttpGet]
         public IEnumerable<Academic> GetAllAcademics()
         {
             // Call the service to get all academics
@@ -54,6 +54,14 @@ namespace COMP1640.Controllers
 
             _academicRepository.UpdateAcademic(id, academicInformation);
             return academicInformation;
+        }
+
+        [HttpDelete("DeleteAcademic")]
+        public string DeleteAcademic(int id)
+        {
+           
+            _academicRepository.DeleteAcademic(id);
+            return "Deleted successfully";
         }
     }
 }

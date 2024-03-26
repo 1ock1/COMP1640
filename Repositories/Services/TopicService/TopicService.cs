@@ -15,7 +15,7 @@ namespace COMP1640.Repositories.Services.TopicService
 
         public string CreateTopic(Topic topic)
         {
-
+                 
             _datacontex.Topics.Add(topic);
             _datacontex.SaveChanges();
             return "oke nhes";
