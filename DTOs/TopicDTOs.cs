@@ -14,8 +14,7 @@ namespace COMP1640.DTOs
             public DateTime EntriesDate { get; set; }
             public DateTime FinalDate { get; set; }
             
-           public int FalcutyId { get; set; }
-           public int AcademicId { get; set; }
+         
         }
 
         public class UpdateTopic
