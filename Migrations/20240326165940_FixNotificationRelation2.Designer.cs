@@ -4,6 +4,7 @@ using COMP1640.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace COMP1640.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240326165940_FixNotificationRelation2")]
+    partial class FixNotificationRelation2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -209,13 +212,16 @@ namespace COMP1640.Migrations
                     b.Property<int?>("ResponseForUserId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PublishedReportId");
 
                     b.HasIndex("ReportId");
 
-                    b.HasIndex("ResponseForUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("ReportComments");
                 });
@@ -358,7 +364,7 @@ namespace COMP1640.Migrations
 
                     b.HasOne("COMP1640.Models.User", "User")
                         .WithMany("ReportComments")
-                        .HasForeignKey("ResponseForUserId");
+                        .HasForeignKey("UserId");
 
                     b.Navigation("PublishedReport");
 

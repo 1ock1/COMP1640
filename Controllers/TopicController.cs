@@ -1,4 +1,5 @@
-﻿using COMP1640.Models;
+﻿using COMP1640.DTOs;
+using COMP1640.Models;
 using COMP1640.Repositories.IRepositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -68,11 +69,17 @@ namespace COMP1640.Controllers
         }
 
         [HttpDelete("DeleteTopic")]
-
         public string DeleteTopic(int id)
         {
             _topicRepository.DeleteTopic(id);
             return "Delete SuccessFully";
+        }
+
+        [HttpPost("GetTopicsByAcademicAndFalcuty")]
+        public ActionResult GetTopicsByAcademicAndFalcuty(CurrentTopicsDTORequest dto)
+        {
+            var result = this._topicRepository.GetCurrentTopicsDTO(dto);
+            return StatusCode(200, result);
         }
     }
 }

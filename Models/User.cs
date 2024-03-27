@@ -14,7 +14,6 @@
         public Falcuty? Falcuty { get; set; }
         public string Status { get; set; }
         public List<Report> Reports { get; set; }
-        public List<ReportComment> ReportComments { get; set; }
-        public List<Notification> Notifications { get; set; }
+        public virtual List<ReportComment> ReportComments { get; set; }
     }
 }

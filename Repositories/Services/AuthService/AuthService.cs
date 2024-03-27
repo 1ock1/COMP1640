@@ -34,6 +34,7 @@ namespace COMP1640.Repositories.Services.AuthService
             var claims = new List<Claim>
                 {
                     new Claim("usid", user.Id.ToString()),
+                    new Claim("falcutyId", user.FalcutyId.ToString()),
                     new Claim("role", user.Role),
                     new Claim(ClaimTypes.Role, user.Role)
                 };
