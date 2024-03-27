@@ -14,26 +14,22 @@ namespace COMP1640.Services {
                     _facultyRepository = facultyRepository;
                 }
 
-                public IEnumerable<Faculty> GetAllFaculties()
+                public IEnumerable<Falcuty> GetAllFaculties()
                 {
                     return _facultyRepository.GetAllFaculties();
                 }
 
-                public Faculty GetFacultyById(int id)
+                public Falcuty GetFacultyById(int id)
                 {
                     return _facultyRepository.GetFacultyById(id);
                 }
 
                 public void CreateFaculty(CreateFacultyDto facultyDto)
                 {
-                    // You can add business logic/validation here before creating faculty
-                    var faculty = new Faculty
+                    var faculty = new Falcuty
                     {
-                        Id = facultyDto.Id,
                         Name = facultyDto.Name,
                         Status = facultyDto.Status,
-
-                        // Map other properties as needed
                     };
                     _facultyRepository.CreateFaculty(faculty);
                 }
@@ -48,7 +44,6 @@ namespace COMP1640.Services {
                     }
 
                     existingFaculty.Name = facultyDto.Name;
-                    existingFaculty.Id = facultyDto.Id;
                     existingFaculty.Status = facultyDto.Status;
                     // Map other properties as needed
 
