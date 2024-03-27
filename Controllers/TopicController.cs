@@ -46,8 +46,8 @@ namespace COMP1640.Controllers
             createTopic.EntriesDate = topic.FinalDate;
             createTopic.FinalDate = topic.FinalDate;
 
-            createTopic.FalcutyId = 1;
-            createTopic.AcademicId = 1;
+            createTopic.FalcutyId = topic.FalcutyId;
+            createTopic.AcademicId = topic.AcademicId;
             _topicRepository.CreateTopic(createTopic);
 
             return createTopic;
@@ -69,12 +69,8 @@ namespace COMP1640.Controllers
         }
 
         [HttpDelete("DeleteTopic")]
-
-        public Topic DeleteTopic(int id)
         public Topic DeleteTopic(int id)
         {
-           Topic deleteTopic= _topicRepository.GetTopicById(id);
-             _topicRepository.DeleteTopic(id);
            Topic deleteTopic= _topicRepository.GetTopicById(id);
              _topicRepository.DeleteTopic(id);
             // Call the service to delete topic
