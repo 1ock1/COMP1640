@@ -55,6 +55,38 @@ namespace COMP1640.Controllers
             }
             return BadRequest();
         }
+        [HttpPost("checkMultipleRole")]
+        public ActionResult CheckMultipleRole(UserDTO userDTO) 
+        {
+            bool isMultipleRole = this._userRepository.IsMultipleRole(userDTO);
+            return StatusCode(200, isMultipleRole);
+        }
+        [HttpPost("loginSelectedRole")]
+        public async Task<ActionResult> SignInSelectedRole(UserMultipleRoleDTO userDTO)
+        {
+            bool isEmailExisted = await this._userRepository.CheckUserByEmail(userDTO.Email);
+            Console.WriteLine(isEmailExisted);
+            if (isEmailExisted == true)
+            {
+                UserDTO dto = new()
+                {
+                    Email = userDTO.Email,
+                    Password = userDTO.Password,
+                };
+                var user = this._userRepository.GetUserInformation(dto);
+                if (user != null)
+                {
+                    var token = _authRepository.GenerateCookieTokenForSelectedRole(user, userDTO.RoleSelected);
+                    var result = new
+                    {
+                        jwt = token,
+                        role = userDTO.RoleSelected,
+                    };
+                    return StatusCode(200, result);
+                }
+            }
+            return BadRequest();
+        }
         [HttpPost("signup")]
         public async Task<ActionResult> CreateAccount(UserSignUpDTO user)
         {
@@ -67,7 +99,7 @@ namespace COMP1640.Controllers
             var result = await _userRepository.CheckUserByEmail(email);
             return StatusCode(200, result);
         }
-        [Authorize(Roles = "STUDENT, ADMIN")]
+        [Authorize(Roles = "STUDENT, ADMIN, COORDINATOR, GUEST, MANAGER")]
         [HttpPost("auth")]
         public async Task<ActionResult> CheckAuth(TokenDTO token)
         {

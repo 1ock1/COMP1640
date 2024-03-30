@@ -10,6 +10,7 @@ namespace COMP1640.Repositories.IRepositories
         public string CreateTopic(Topic topic);
         public string UpdateTopic(Topic topic);
         public string DeleteTopic(int id);
-
+        public List<CurrentTopicsDTO> GetCurrentTopicsDTO(CurrentTopicsDTORequest dto);
+        public bool CheckTopicIsAllowed(IsTopicAllowedDTO dto);
     }
 }

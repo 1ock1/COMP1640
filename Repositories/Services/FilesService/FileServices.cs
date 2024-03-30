@@ -10,6 +10,7 @@ using System.IO;
 using Azure.Core;
 using COMP1640.DTOs;
 using COMP1640.Models;
+using System.Text;
 
 namespace COMP1640.Repositories.Services.FilesService
 {
@@ -184,6 +185,29 @@ namespace COMP1640.Repositories.Services.FilesService
                 Console.WriteLine(e.Message);
                 return "Upload Failure";
             }
+        }
+
+        public async Task<string> UpdateFile(IFormFile file, string guid)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(guid);
+            sb.Append(".docx");
+            var fileDocument = this._dataContext.FileReports.FirstOrDefault(f => f.Id == guid);
+            if (fileDocument == null)
+            {
+                return "Upload Failure";
+            }
+            fileDocument.Name = file.FileName;
+            await this._dataContext.SaveChangesAsync();
+            var blobServiceClient = new BlobServiceClient(this.connectionString);
+            var fileContainer = blobServiceClient.GetBlobContainerClient("hehe");
+            Console.WriteLine(sb.ToString());
+            BlobClient client = fileContainer.GetBlobClient(sb.ToString());
+            using (Stream stream = file.OpenReadStream())
+            {
+                await client.UploadAsync(stream, true);
+            }
+            return "Uploaded File Successfully";
         }
     }
 }

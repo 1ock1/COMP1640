@@ -74,5 +74,24 @@ namespace COMP1640.Repositories.Services.UserService
 
             return null;
         }
+
+        public bool IsMultipleRole(UserDTO userDTO)
+        {
+            var user = this._dataContext.User.FirstOrDefault(u => u.Email == userDTO.Email);
+            if (user != null)
+            {
+                if (userDTO.Password == user.Password)
+                {
+                    bool IsMulipleRole = user.Role.Contains(",");
+                    if (IsMulipleRole)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+
+            return false;
+        }
     }
 }

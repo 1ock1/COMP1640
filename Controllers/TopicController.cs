@@ -83,5 +83,19 @@ namespace COMP1640.Controllers
             // Call the service to delete topic
             return deleteTopic;
         }
+        
+        [HttpPost("GetTopicsByAcademicAndFalcuty")]
+        public ActionResult GetTopicsByAcademicAndFalcuty(CurrentTopicsDTORequest dto)
+        {
+            var result = this._topicRepository.GetCurrentTopicsDTO(dto);
+            return StatusCode(200, result);
+        }
+
+        [HttpPost("CheckIsTopicAllowed")]
+        public ActionResult CheckIsTopicAllowed(IsTopicAllowedDTO dto)
+        {
+            var result = this._topicRepository.CheckTopicIsAllowed(dto);
+            return StatusCode(200, result);
+        }
     }
 }

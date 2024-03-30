@@ -7,7 +7,11 @@
         public int StudentId { get; set; }
         public IFormFile File { get; set; }
     }
-
+    public class UpdateFileDTO
+    {
+        public string Guid { get; set; }
+        public IFormFile File { get; set; }
+    }
     public class SaveFileDTO
     {
         public IFormCollection data { get; set; }

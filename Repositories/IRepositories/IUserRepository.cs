@@ -11,5 +11,6 @@ namespace COMP1640.Repositories.IRepositories
         public Task<bool> CreateAccount(UserSignUpDTO user);
         public Task<bool> CheckUserByEmail(string email);
         public User GetUserInformation(UserDTO user);
+        public bool IsMultipleRole(UserDTO user);
     }
 }

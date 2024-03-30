@@ -28,4 +28,10 @@ namespace COMP1640.DTOs
 
 
     }
+
+    public class IsTopicAllowedDTO
+    {
+        public int TopicId { get; set; }
+        public int FalcutyId { get; set; }
+    }
 }
