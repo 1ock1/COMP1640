@@ -9,6 +9,7 @@ namespace COMP1640.Repositories.IRepositories
         public Task<string> CreateContainer(string container);
 
         public Task<string> UploadFile(IFormFile file, string guid);
+        public Task<string> UpdateFile(IFormFile file, string guid);
         public Task<string> DeleteFile(string file);
         public Task<string> RetrieveContentBlob(string file);
         public Task<string> RetrieveDocument(string file);

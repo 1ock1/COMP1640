@@ -40,4 +40,10 @@ namespace COMP1640.DTOs
         public int FalcutyId { get; set; }
         public int AcademicId { get; set; }
     }
+
+    public class IsTopicAllowedDTO
+    {
+        public int TopicId { get; set; }
+        public int FalcutyId { get; set; }
+    }
 }

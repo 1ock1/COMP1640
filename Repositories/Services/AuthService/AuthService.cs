@@ -30,7 +30,7 @@ namespace COMP1640.Repositories.Services.AuthService
         {
             var secret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("This is my secret key a ah"));
             var signingCredentials = new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
-
+            Console.WriteLine(user.Role);
             var claims = new List<Claim>
                 {
                     new Claim("usid", user.Id.ToString()),
@@ -48,6 +48,30 @@ namespace COMP1640.Repositories.Services.AuthService
             );
             var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
             return token;
-        }   
+        }
+
+        public string GenerateCookieTokenForSelectedRole(User user, string selectedRole)
+        {
+            var secret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("This is my secret key a ah"));
+            var signingCredentials = new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
+            Console.WriteLine(user.Role);
+            var claims = new List<Claim>
+                {
+                    new Claim("usid", user.Id.ToString()),
+                    new Claim("falcutyId", user.FalcutyId.ToString()),
+                    new Claim("role", selectedRole),
+                    new Claim(ClaimTypes.Role, selectedRole)
+                };
+
+            var tokenOptions = new JwtSecurityToken(
+                issuer: "Issue Here",
+                audience: "Audiencce Here",
+                claims: claims,
+                expires: DateTime.Now.AddSeconds(60),
+                signingCredentials: signingCredentials
+            );
+            var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+            return token;
+        }
     }
 }

@@ -37,6 +37,12 @@ namespace COMP1640.Controllers
             Console.WriteLine(result);
             return StatusCode(200, guid);
         }
+        [HttpPut("UpdateFile")]
+        public async Task<ActionResult> UpdateFile([FromForm] UpdateFileDTO form)
+        {
+            var result = await _fileReporitory.UpdateFile(form.File, form.Guid);
+            return StatusCode(200, result);
+        }
         [HttpDelete("{file}")]
         public async Task<ActionResult> DeleteFile(string file)
         {

@@ -16,6 +16,19 @@ namespace COMP1640.Repositories.Services.TopicService
             this._datacontex = datacontex;
         }
 
+        public bool CheckTopicIsAllowed(IsTopicAllowedDTO dto)
+        {
+            var topic = this._datacontex.Topics.FirstOrDefault(t=>t.Id == dto.TopicId);
+            if(topic != null)
+            {
+                if(topic.FalcutyId == dto.FalcutyId)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public string CreateTopic(Topic topic)
         {
 
