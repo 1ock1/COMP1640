@@ -7,7 +7,12 @@ namespace COMP1640.DTOs
         public string Email { get; set; }
         public string Password { get; set; }
     }
-
+    public class UserMultipleRoleDTO
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string RoleSelected { get; set; }
+    }
     public class UserSignUpDTO
     {
         public string Name { get; set; }
