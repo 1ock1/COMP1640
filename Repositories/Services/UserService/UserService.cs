@@ -93,5 +93,22 @@ namespace COMP1640.Repositories.Services.UserService
 
             return false;
         }
+
+        public CoordinatorInforResponseDTO GetCoordinatorInformation(GetCoordinatorInforDTO dto)
+        {
+            var user = this._dataContext.User.FirstOrDefault(u => u.Role == dto.Role && u.FalcutyId == dto.FalcutyId);
+            if (user != null)
+            {
+                CoordinatorInforResponseDTO result = new()
+                {
+                    Name = user.Name,
+                    Id = user.Id,
+                    Email = user.Email,
+                };
+                return result;
+            }
+
+            return null;
+        }
     }
 }

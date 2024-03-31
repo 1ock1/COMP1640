@@ -14,6 +14,23 @@ namespace COMP1640.Repositories.Services.FileReportRepository
         {
             this.dataContext = dataContext;
         }
+
+        public List<FileReportResponseDTO> GetAllFileOfOneReport(int reportId)
+        {
+            List<FileReportResponseDTO> list = new List<FileReportResponseDTO>();
+            var result = this.dataContext.FileReports.Where(fr => fr.ReportId == reportId).ToList();
+            foreach(var resultItem in result)
+            {
+                FileReportResponseDTO response = new()
+                {
+                    Id = resultItem.Id,
+                    Type = resultItem.Type,
+                };
+                list.Add(response);
+            }
+            return list;
+        }
+
         public string GetDocumentId(int reportId)
         {
             var result = this.dataContext.FileReports.FirstOrDefault(fr => fr.ReportId == reportId && fr.Type=="document");

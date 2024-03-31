@@ -99,6 +99,12 @@ namespace COMP1640.Controllers
             var result = await _userRepository.CheckUserByEmail(email);
             return StatusCode(200, result);
         }
+        [HttpPost("GetCoordinatorInformation")]
+        public ActionResult GetCoordinatorInformation(GetCoordinatorInforDTO request)
+        {
+            var result = this._userRepository.GetCoordinatorInformation(request);
+            return StatusCode(200, result);
+        }
         [Authorize(Roles = "STUDENT, ADMIN, COORDINATOR, GUEST, MANAGER")]
         [HttpPost("auth")]
         public async Task<ActionResult> CheckAuth(TokenDTO token)

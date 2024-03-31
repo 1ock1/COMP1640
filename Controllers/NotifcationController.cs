@@ -32,5 +32,11 @@ namespace COMP1640.Controllers
             var result = await notificationRepository.UpdateIsRead(dto);
             return StatusCode(200, result);
         }
+        [HttpDelete("DeleteNotification")]
+        public ActionResult DeleteNotification(int notifyId)
+        {
+            var result = notificationRepository.DeleteNotification(notifyId);
+            return StatusCode(200, result);
+        }
     }
 }

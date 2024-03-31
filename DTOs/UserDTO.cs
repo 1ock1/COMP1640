@@ -37,4 +37,16 @@ namespace COMP1640.DTOs
     {
         public string Token { get; set; }
     }
+
+    public class GetCoordinatorInforDTO
+    {
+        public int FalcutyId { get; set; }
+        public string Role { get; set; }
+    }
+    public class CoordinatorInforResponseDTO
+    {
+        public string Email { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
 }

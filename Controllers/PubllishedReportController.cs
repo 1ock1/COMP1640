@@ -26,5 +26,11 @@ namespace COMP1640.Controllers
             var result = await this._publishedReportRepository.GetPublishedReport();
             return StatusCode(200, result);
         }
+        [HttpPost("CheckIfReportPublished")]
+        public ActionResult CheckIfReportPublished(int reportId)
+        {
+            var result = this._publishedReportRepository.IsReportPublished(reportId);
+            return StatusCode(200, result);
+        }
     }
 }
