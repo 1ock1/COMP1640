@@ -26,5 +26,11 @@ namespace COMP1640.Controllers
             var result = await this.fileReportRepository.GetDocumentImages(dto);
             return StatusCode(200, result);
         }
+        [HttpPost("GetAllFileOfOneReport")]
+        public  ActionResult GetAllFileOfOneReport(int reportId)
+        {
+            var result = this.fileReportRepository.GetAllFileOfOneReport(reportId);
+            return StatusCode(200, result);
+        }
     }
 }

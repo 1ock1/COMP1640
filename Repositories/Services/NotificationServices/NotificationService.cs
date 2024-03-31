@@ -38,6 +38,18 @@ namespace COMP1640.Repositories.Services.NotificationServices
             }
         }
 
+        public bool DeleteNotification(int notifyId)
+        {
+            var notify = this._dataContext.Notification.Find(notifyId);
+            if (notify != null)
+            {
+                this._dataContext.Notification.Remove(notify);
+                this._dataContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
         public async Task<List<NotifyReturnDTO>> GetAllNotifications(NotifyRequestDTO dto)
         {
             List<NotifyReturnDTO> list = new List<NotifyReturnDTO>();

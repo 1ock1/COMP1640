@@ -29,13 +29,13 @@ namespace COMP1640.Controllers
         public async Task<ActionResult> UploadFile([FromForm] FileDTO form)
         {
             StringBuilder sb = new StringBuilder();
-            string guid = await this._reportReporitory.CreateReportFirstTime(form.TopicId, form.StudentId, form.File.FileName, form.Type);
-            sb.Append(guid);
+            UploadNewReportDTO uploadResult = await this._reportReporitory.CreateReportFirstTime(form.TopicId, form.StudentId, form.File.FileName, form.Type);
+            sb.Append(uploadResult.GUID);
             sb.Append(".docx");
-            Console.WriteLine(guid);
+            Console.WriteLine(uploadResult.GUID);
             var result = await _fileReporitory.UploadFile(form.File, sb.ToString());
             Console.WriteLine(result);
-            return StatusCode(200, guid);
+            return StatusCode(200, uploadResult);
         }
         [HttpPut("UpdateFile")]
         public async Task<ActionResult> UpdateFile([FromForm] UpdateFileDTO form)

@@ -43,5 +43,13 @@ namespace COMP1640.Repositories.Services.PublishedReportServices
             var result = await this._dataContext.PublishedReports.ToListAsync();
             return result;
         }
+
+        public bool IsReportPublished(int reportId)
+        {
+            var result = this._dataContext.PublishedReports.FirstOrDefault(pl=>pl.ReportId == reportId);
+            if (result == null)
+                return false;
+            return true;
+        }
     }
 }

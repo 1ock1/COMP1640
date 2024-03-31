@@ -17,4 +17,10 @@
         public int ReportId { get; set; }
         public string Type { get; set; }
     }
+
+    public class FileReportResponseDTO
+    {
+        public string Id { get; set; }
+        public string Type { get; set; }
+    }
 }
