@@ -4,6 +4,7 @@ using COMP1640.Repositories.IRepositories;
 using COMP1640.Utils;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using System.Text;
 
 namespace COMP1640.Repositories.Services.ReportRepository
 {
@@ -45,9 +46,12 @@ namespace COMP1640.Repositories.Services.ReportRepository
                     return null;
                 }
                 Guid FileID = Guid.NewGuid();
+                StringBuilder sb = new StringBuilder();
+                sb.Append(FileID.ToString());
+                sb.Append(".docx");
                 FileReport fileReport = new()
                 {
-                    Id = FileID.ToString(),
+                    Id = sb.ToString(),
                     Name = filename,
                     Type = type,
                     ReportId = reportId,

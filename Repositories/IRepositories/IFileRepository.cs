@@ -1,5 +1,6 @@
 ﻿using COMP1640.DTOs;
 using COMP1640.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace COMP1640.Repositories.IRepositories
 {
@@ -16,5 +17,6 @@ namespace COMP1640.Repositories.IRepositories
         public Task<string> RetrieveDocumentCC2();
         public void SaveDocument(SaveFileDTO dto);
         public Task<string> UploadMultipleImages(List<FileReportDTO> listFileReport);
+        public Task<List<ResourceDTO>> GetResource(int reportId);
     }
 }

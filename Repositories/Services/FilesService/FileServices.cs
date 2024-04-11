@@ -11,6 +11,8 @@ using Azure.Core;
 using COMP1640.DTOs;
 using COMP1640.Models;
 using System.Text;
+using Microsoft.AspNetCore.Mvc;
+using System.IO.Compression;
 
 namespace COMP1640.Repositories.Services.FilesService
 {
@@ -173,9 +175,10 @@ namespace COMP1640.Repositories.Services.FilesService
                 foreach (FileReportDTO dto in listFileReport)
                 {
                     BlobClient client = fileContainer.GetBlobClient(dto.Id);
+                    Console.WriteLine(dto.File.FileName);
                     using (Stream stream = dto.File.OpenReadStream())
                     {
-                        await client.UploadAsync(stream, true);
+                        await client.UploadAsync(stream, new BlobHttpHeaders { ContentType = dto.File.ContentType });
                     }
                 }
                 return "Upload Images SuccessFully";
@@ -189,9 +192,6 @@ namespace COMP1640.Repositories.Services.FilesService
 
         public async Task<string> UpdateFile(IFormFile file, string guid)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(guid);
-            sb.Append(".docx");
             var fileDocument = this._dataContext.FileReports.FirstOrDefault(f => f.Id == guid);
             if (fileDocument == null)
             {
@@ -201,13 +201,36 @@ namespace COMP1640.Repositories.Services.FilesService
             await this._dataContext.SaveChangesAsync();
             var blobServiceClient = new BlobServiceClient(this.connectionString);
             var fileContainer = blobServiceClient.GetBlobContainerClient("hehe");
-            Console.WriteLine(sb.ToString());
-            BlobClient client = fileContainer.GetBlobClient(sb.ToString());
+
+            BlobClient client = fileContainer.GetBlobClient(guid);
             using (Stream stream = file.OpenReadStream())
             {
                 await client.UploadAsync(stream, true);
             }
             return "Uploaded File Successfully";
+        }
+
+        public async Task<List<ResourceDTO>> GetResource(int reportId)
+        {
+            List<ResourceDTO> list = new List<ResourceDTO>();
+            var listResource = this._dataContext.FileReports.Where(fr=>fr.ReportId == reportId).ToList();
+            if (listResource.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                foreach (var resource in listResource)
+                {
+                    ResourceDTO item = new()
+                    {
+                        Id = resource.Id,
+                        Name = resource.Name,
+                    };
+                    list.Add(item);
+                }
+                return list;
+            }
         }
     }
 }
