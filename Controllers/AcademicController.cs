@@ -17,7 +17,7 @@ namespace COMP1640.Controllers
             this._academicRepository = academicRepository;
         }
 
-        [HttpGet]
+        [HttpGet("GetAllAcademic")]
         public IEnumerable<Academic> GetAllAcademics()
         {
             // Call the service to get all academics
