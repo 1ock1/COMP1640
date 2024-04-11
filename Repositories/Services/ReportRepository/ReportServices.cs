@@ -60,7 +60,7 @@ namespace COMP1640.Repositories.Services.ReportRepository
                 await this.dataContext.SaveChangesAsync();
                 UploadNewReportDTO result = new()
                 {
-                    GUID = FileID.ToString(),
+                    GUID = sb.ToString(),
                     ReportID = reportId,
                 };
                 return result;
