@@ -4,6 +4,7 @@ using COMP1640.Models;
 using COMP1640.Repositories.IRepositories;
 using COMP1640.Utils;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace COMP1640.Repositories.Services.FileReportRepository
 {
@@ -77,16 +78,20 @@ namespace COMP1640.Repositories.Services.FileReportRepository
                 foreach (IFormFile file in dto.Files)
                 {
                     Guid id = Guid.NewGuid();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append(id.ToString());
+                    string extension = Path.GetExtension(file.FileName);
+                    sb.Append(extension);
                     FileReport fileReport = new()
                     {
-                        Id = id.ToString(),
+                        Id = sb.ToString(),
                         Name = file.FileName,
                         Type = "image",
                         ReportId = dto.ReportId,
                     };
                     FileReportDTO fileReportDTO = new()
                     {
-                        Id = id.ToString(),
+                        Id = sb.ToString(),
                         File = file,
                     };
                     result.Add(fileReportDTO);

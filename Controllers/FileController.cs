@@ -1,7 +1,9 @@
-﻿using COMP1640.DTOs;
+﻿using Azure.Storage.Blobs;
+using COMP1640.DTOs;
 using COMP1640.Repositories.IRepositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.IO.Compression;
 using System.Text;
 
 namespace COMP1640.Controllers
@@ -84,6 +86,30 @@ namespace COMP1640.Controllers
         {
             var result = await this._reportReporitory.IsReportExistWithTopicId(dto);
             return StatusCode(200, result);
+        }
+        [HttpGet("DownloadZip/{reportId}")]
+        public async Task<ActionResult> DownloadZipFile(int reportId)
+        {
+            BlobServiceClient blobServiceClient = new BlobServiceClient("DefaultEndpointsProtocol=https;AccountName=comp1640storage;AccountKey=2NKxU3inA06uyA64hwJeBtofizsRP+TRzG5wbkZmbzFLMiMJIp0ToAoiefMxLzFEk8kUXBrxpQMv+ASt6f1FNw==;EndpointSuffix=core.windows.net");
+            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient("hehe");
+            var resouces = await this._fileReporitory.GetResource(reportId);
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var zipArchive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+                {
+                    foreach (var item in resouces)
+                    {
+                        var fileEntryInZip = zipArchive.CreateEntry(item.Name);
+                        var blobClient = containerClient.GetBlobClient(item.Id);
+                        using (var fileStream = fileEntryInZip.Open())
+                        {
+                            await blobClient.DownloadToAsync(fileStream);
+                        }
+                    }
+                }
+                memoryStream.Position = 0;
+                return File(memoryStream.ToArray(), "application/zip", "Report "+reportId.ToString());
+            }
         }
     }
 }
