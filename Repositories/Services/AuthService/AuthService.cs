@@ -43,7 +43,7 @@ namespace COMP1640.Repositories.Services.AuthService
                 issuer: "Issue Here",
                 audience: "Audiencce Here",
                 claims: claims,
-                expires: DateTime.Now.AddSeconds(60),
+                expires: DateTime.Now.AddSeconds(100),
                 signingCredentials: signingCredentials
             );
             var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);

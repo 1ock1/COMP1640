@@ -146,5 +146,151 @@ namespace COMP1640.Repositories.Services.ReportRepository
             }
             return false;
         }
+
+        public int TotalContributionOfFacultyPerAcademic(DashboardManagerRequestDTO reportManagerRequestDTO)
+        {
+            int result = 0;
+            try
+            {
+                SqlConnection conn = Conn.Connection();
+                SqlCommand cmdRevenue = new SqlCommand("PRO_TotalContributionPerAcademicOfAFaculty", conn);
+                cmdRevenue.CommandType = CommandType.StoredProcedure;
+                cmdRevenue.Parameters.AddWithValue("@academic", reportManagerRequestDTO.AcademicId);
+                cmdRevenue.Parameters.AddWithValue("@faculty", reportManagerRequestDTO.FacultyId);
+                conn.Open();
+
+                SqlDataReader cmdRdRevenue = cmdRevenue.ExecuteReader();
+                while (cmdRdRevenue.Read())
+                {
+                    result = Convert.ToInt32(cmdRdRevenue.GetValue(0).ToString());
+                }
+                conn.Close();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return result;
+            }
+        }
+
+        public decimal SubmissionPercentageOfFacultyPerAcademic(DashboardManagerRequestDTO reportManagerRequestDTO)
+        {
+            decimal result = 0;
+            try
+            {
+                SqlConnection conn = Conn.Connection();
+                SqlCommand cmdRevenue = new SqlCommand("PRO_PercetageOfSubmissionOfFacultyPerAcademicYear", conn);
+                cmdRevenue.CommandType = CommandType.StoredProcedure;
+                cmdRevenue.Parameters.AddWithValue("@academic", reportManagerRequestDTO.AcademicId);
+                cmdRevenue.Parameters.AddWithValue("@faculty", reportManagerRequestDTO.FacultyId);
+                conn.Open();
+
+                SqlDataReader cmdRdRevenue = cmdRevenue.ExecuteReader();
+                while (cmdRdRevenue.Read())
+                {
+                    result = Convert.ToDecimal(cmdRdRevenue.GetValue(0).ToString());
+                }
+                conn.Close();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return result;
+            }
+        }
+
+        public object CheckReportComment(int topicId)
+        {
+            CommentStatusResponseDTO cmtSt = new CommentStatusResponseDTO();
+            try
+            {
+                SqlConnection conn = Conn.Connection();
+                SqlCommand cmdRevenue = new SqlCommand("PRO_CommentedAndUnCommentedReport", conn);
+                cmdRevenue.CommandType = CommandType.StoredProcedure;
+                cmdRevenue.Parameters.AddWithValue("@topicId", topicId);
+                conn.Open();
+
+                SqlDataReader cmdRdRevenue = cmdRevenue.ExecuteReader();
+                while (cmdRdRevenue.Read())
+                {
+                    cmtSt = new()
+                    {
+                        NotCommentReport = cmdRdRevenue.GetValue(0).ToString(),
+                        CommentedReport = cmdRdRevenue.GetValue(1).ToString(),
+                    };
+                }
+                conn.Close();
+                return cmtSt;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public List<TopicStatusDTO> ListTopicsStatusOfFacultyPerAcademic(DashboardManagerRequestDTO reportManagerRequestDTO)
+        {
+            List<TopicStatusDTO> list = new List<TopicStatusDTO>();
+            try
+            {
+                SqlConnection conn = Conn.Connection();
+                SqlCommand cmdRevenue = new SqlCommand("PRO_StatusOfTopicsBaseFacultyAndAcademic", conn);
+                cmdRevenue.CommandType = CommandType.StoredProcedure;
+                cmdRevenue.Parameters.AddWithValue("@academic", reportManagerRequestDTO.AcademicId);
+                cmdRevenue.Parameters.AddWithValue("@faculty", reportManagerRequestDTO.FacultyId);
+                conn.Open();
+
+                SqlDataReader cmdRdRevenue = cmdRevenue.ExecuteReader();
+                while (cmdRdRevenue.Read())
+                {
+                    TopicStatusDTO topicStatus = new()
+                    {
+                        Id = Convert.ToInt32(cmdRdRevenue.GetValue(0).ToString()),
+                        Name = cmdRdRevenue.GetValue(1).ToString(),
+                        Pending = Convert.ToInt32(cmdRdRevenue.GetValue(2).ToString()),
+                        Editted = Convert.ToInt32(cmdRdRevenue.GetValue(3).ToString()),
+                        Published = Convert.ToInt32(cmdRdRevenue.GetValue(4).ToString()),
+                    };
+                    list.Add(topicStatus);
+                }
+                conn.Close();
+                return list;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public int TotalOfOneStatusOnTopic(OneStatusOfTopicDTO dto)
+        {
+            int result = 0;
+            try
+            {
+                SqlConnection conn = Conn.Connection();
+                SqlCommand cmdRevenue = new SqlCommand("PRO_TotalReportPerTopicOnStatus", conn);
+                cmdRevenue.CommandType = CommandType.StoredProcedure;
+                cmdRevenue.Parameters.AddWithValue("@topicID", dto.Id);
+                cmdRevenue.Parameters.AddWithValue("@status", dto.Status);
+                conn.Open();
+
+                SqlDataReader cmdRdRevenue = cmdRevenue.ExecuteReader();
+                while (cmdRdRevenue.Read())
+                {
+                    result = Convert.ToInt32(cmdRdRevenue.GetValue(0).ToString());
+                }
+                conn.Close();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return result;
+            }
+        }
     }
 }
