@@ -33,4 +33,29 @@
         public string GUID { get; set; }
         public int ReportID { get; set; }
     }
+
+    public class DashboardManagerRequestDTO
+    {
+        public int AcademicId { get; set; }
+        public int FacultyId { get; set; }
+    }
+
+    public class CommentStatusResponseDTO
+    {
+        public string NotCommentReport { get; set; }
+        public string CommentedReport { get; set; }
+    }
+    public class TopicStatusDTO
+    {
+        public int Id { get; set; }
+        public string Name { set; get; }
+        public int Pending { get; set; }
+        public int Editted { get; set; }
+        public int Published { get; set; }
+    }
+    public class OneStatusOfTopicDTO
+    {
+        public int Id { get; set; }
+        public string Status { set; get; }
+    }
 }
