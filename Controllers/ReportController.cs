@@ -62,5 +62,17 @@ namespace COMP1640.Controllers
             var result = this.reportRepository.TotalOfOneStatusOnTopic(dto);
             return StatusCode(200, result);
         }
+        [HttpPost("PercentagePublishedReport")]
+        public ActionResult PercentagePublishedReport(DashboardManagerRequestDTO dto)
+        {
+            var result = this.reportRepository.PublishedReportRating(dto);
+            return StatusCode(200, result);
+        }
+        [HttpPost("TotalContributor")]
+        public ActionResult TotalContributor(DashboardManagerRequestDTO dto)
+        {
+            var result = this.reportRepository.TotalContributorOnAcademicAndFaculty(dto);
+            return StatusCode(200, result);
+        }
     }
 }

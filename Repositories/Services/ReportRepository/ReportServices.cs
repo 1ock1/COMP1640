@@ -292,5 +292,59 @@ namespace COMP1640.Repositories.Services.ReportRepository
                 return result;
             }
         }
+
+        public decimal PublishedReportRating(DashboardManagerRequestDTO reportManagerRequestDTO)
+        {
+            decimal result = 0;
+            try
+            {
+                SqlConnection conn = Conn.Connection();
+                SqlCommand cmdRevenue = new SqlCommand("PRO_PublishedPercentageOfFacultyAndAcademic", conn);
+                cmdRevenue.CommandType = CommandType.StoredProcedure;
+                cmdRevenue.Parameters.AddWithValue("@academic", reportManagerRequestDTO.AcademicId);
+                cmdRevenue.Parameters.AddWithValue("@faculty", reportManagerRequestDTO.FacultyId);
+                conn.Open();
+
+                SqlDataReader cmdRdRevenue = cmdRevenue.ExecuteReader();
+                while (cmdRdRevenue.Read())
+                {
+                    result = Convert.ToDecimal(cmdRdRevenue.GetValue(0).ToString());
+                }
+                conn.Close();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return result;
+            }
+        }
+
+        public int TotalContributorOnAcademicAndFaculty(DashboardManagerRequestDTO reportManagerRequestDTO)
+        {
+            int result = 0;
+            try
+            {
+                SqlConnection conn = Conn.Connection();
+                SqlCommand cmdRevenue = new SqlCommand("PRO_TotalContributorOfFacultyAndAcademic", conn);
+                cmdRevenue.CommandType = CommandType.StoredProcedure;
+                cmdRevenue.Parameters.AddWithValue("@academic", reportManagerRequestDTO.AcademicId);
+                cmdRevenue.Parameters.AddWithValue("@faculty", reportManagerRequestDTO.FacultyId);
+                conn.Open();
+
+                SqlDataReader cmdRdRevenue = cmdRevenue.ExecuteReader();
+                while (cmdRdRevenue.Read())
+                {
+                    result = Convert.ToInt32(cmdRdRevenue.GetValue(0).ToString());
+                }
+                conn.Close();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return result;
+            }
+        }
     }
 }

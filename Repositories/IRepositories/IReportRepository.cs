@@ -15,5 +15,7 @@ namespace COMP1640.Repositories.IRepositories
         public object CheckReportComment(int topicId);
         public List<TopicStatusDTO> ListTopicsStatusOfFacultyPerAcademic(DashboardManagerRequestDTO reportManagerRequestDTO);
         public int TotalOfOneStatusOnTopic(OneStatusOfTopicDTO dto);
+        public decimal PublishedReportRating(DashboardManagerRequestDTO reportManagerRequestDTO);
+        public int TotalContributorOnAcademicAndFaculty(DashboardManagerRequestDTO reportManagerRequestDTO);
     }
 }
