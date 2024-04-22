@@ -28,6 +28,7 @@ namespace COMP1640.Repositories.Services.UserService
                     Role = userDTO.Role,
                     BirthDate = userDTO.BirthDate,
                     PhoneNumber = userDTO.PhoneNumber,
+                    FalcutyId = userDTO.FacultyId,
                 };
                 this._dataContext.User.Add(user);
                 await this._dataContext.SaveChangesAsync();
